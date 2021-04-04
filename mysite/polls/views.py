@@ -6,7 +6,7 @@ from django.db.models import F
 from django.views import generic
 from django.utils import timezone
 
-from .models import Question, Choice
+from .models import Question, Choice, Survey
 
 from accounts.decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.decorators import login_required
@@ -71,32 +71,27 @@ def get_queryset(self):
 
 
 def index(request):
-    questions = Question.objects.all()
-    latest_question_list = Question.objects.order_by('-pub_date')[:3]
+    surveys = Survey.objects.all()
+    latest_survey_list = Survey.objects.order_by('-survey_created_at')[:3]
 
     context = {
-        'questions': questions,
-        # 'li': li,
-        'latest_question_list': latest_question_list
+        'surveys': surveys,
+        'latest_survey_list': latest_survey_list
     }
     return render(request, 'polls/index.html', context)
 
 
 @login_required(login_url='login')
 def survey(request):
-    questions = Question.objects.all()
+    surveys = Survey.objects.all()
     #choices = list(Question.objects.all()[0].choice_set.all())
 
-    class CS:
-        def results(self):
-            return list(Question.objects.all()[self].choice_set.all())
-
-    context = {'questions': questions}
+    context = {'surveys': surveys}
     return render(request, 'polls/survey.html', context)
 
 
 @login_required(login_url='login')
-def detail(request, question_id):
+def detail(request, survey_id):
     # return HttpResponse("You are looking at question %s." % question_id)
     '''  using original tech of try render and else raise 404
     try:
@@ -107,25 +102,25 @@ def detail(request, question_id):
     '''
     # below uses get_object_or_404 shortcut API, which return 404 if data does not exist
 
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/detail.html', {'question': question})
+    survey = get_object_or_404(Survey, pk=survey_id)
+    return render(request, 'polls/detail.html', {'survey': survey})
 
 
 @login_required(login_url='login')
-def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/results.html', {'question': question})
+def results(request, survey_id):
+    survey = get_object_or_404(Survey, pk=survey_id)
+    return render(request, 'polls/results.html', {'survey': survey})
 
 
 @login_required(login_url='login')
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
+def vote(request, survey_id):
+    survey = get_object_or_404(Survey, pk=survey_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # redisplay the question voting form
         return render(request, 'polls/detail.html', {
-            'question': question,
+            'survey': survey,
             'error_message': "You didn't select a choice",
         })
     else:

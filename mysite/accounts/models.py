@@ -46,6 +46,7 @@ class Order(models.Model):
         ('Delivered', 'Delivered')
     )
 
+    # on_delete = models.SET_NULL
     customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)

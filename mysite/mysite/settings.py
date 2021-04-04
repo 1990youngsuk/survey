@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
 
     'django_filters',
+    'nested_admin',
 ]
 
 MIDDLEWARE = [

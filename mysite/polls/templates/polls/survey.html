@@ -6,14 +6,14 @@
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-{% for question in questions %}
+{% for survey in surveys %}
 <div class="col">
     <div class="card shadow-sm">
       <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><a href="{% url 'polls:detail' question.id %}"><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ question.question_text }} </a> </text></svg>
 
       <div class="card-body">
 
-          {% for i in question.choice_set.all %}
+          {% for i in survey.question_set.all %}
             <p class="card-text">{{i}}</p>
           {% endfor %}
 
@@ -25,7 +25,7 @@
             <button type="button" class="btn btn-sm btn-outline-secondary">Vote</button>
             <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
           </div>
-          <small class="text-muted">{{question.pub_date.year}}/{{question.pub_date.month}}/{{question.pub_date.day}}</small>
+          <small class="text-muted">{{survey.survey_created_at.year}}/{{survey.survey_created_at.month}}/{{survey.survey_created_at.day}}</small>
         </div>
       </div>
     </div>

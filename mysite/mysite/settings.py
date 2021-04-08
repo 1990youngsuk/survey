@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
 
     'django_filters',
+
+    "debug_toolbar",
+    "survey",
 ]
 
 MIDDLEWARE = [

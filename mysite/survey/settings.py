@@ -49,10 +49,10 @@ DATABASES = {
     }
 }
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
@@ -64,4 +64,3 @@ STATICFILES_DIRS = []
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/surveys/"
 INTERNAL_IPS = ["127.0.0.1"]
-
